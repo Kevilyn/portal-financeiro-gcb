@@ -26,9 +26,11 @@ const DashboardLayout = () => {
   };
 
   const isDebtJourney = isOverdue() || isSuspended();
+  const hasNoContracts = !user?.contratos?.length;
+  const isAcquisitionJourney = !isDebtJourney && hasNoContracts;
 
   const debtSidebarItems = [
-    { icon: Home, label: 'In?cio', path: '/dashboard' },
+    { icon: Home, label: 'Início', path: '/dashboard' },
     { icon: Receipt, label: 'Segunda Via', path: '/dashboard/segunda-via' },
     { icon: FileText, label: 'Simular Acordo', path: '/dashboard/simular-acordo-lista' },
     { icon: Briefcase, label: 'Renegociar', path: '/dashboard/renegociar' },
@@ -38,7 +40,7 @@ const DashboardLayout = () => {
   ];
 
   const productSidebarItems = [
-    { icon: Home, label: 'In?cio', path: '/dashboard' },
+    { icon: Home, label: 'Início', path: '/dashboard' },
     { icon: ShoppingBag, label: 'Meus Produtos', path: '/dashboard/produtos' },
     { icon: Receipt, label: 'Segunda Via', path: '/dashboard/segunda-via' },
     { icon: FastForward, label: 'Adiantamento', path: '/dashboard/adiantar-parcelas-lista' },
@@ -47,7 +49,14 @@ const DashboardLayout = () => {
     { icon: HelpCircle, label: 'Ajuda', path: '/dashboard/ajuda' }
   ];
 
-  const sidebarItems = isDebtJourney ? debtSidebarItems : productSidebarItems;
+  const acquisitionSidebarItems = [
+    { icon: Home, label: 'Início', path: '/dashboard' },
+    { icon: ShoppingBag, label: 'Produtos disponíveis', path: '/dashboard/produtos' },
+    { icon: CreditCard, label: 'Casas Bahia Pay', path: '/dashboard/casas-bahia-pay' },
+    { icon: HelpCircle, label: 'Ajuda', path: '/dashboard/ajuda' }
+  ];
+
+  const sidebarItems = isDebtJourney ? debtSidebarItems : isAcquisitionJourney ? acquisitionSidebarItems : productSidebarItems;
 
   return (
     <div className="min-h-screen bg-gray-50 pt-20 md:pt-24 relative">

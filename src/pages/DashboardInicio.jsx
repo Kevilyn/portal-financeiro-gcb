@@ -7,9 +7,12 @@ import {
   BadgePercent,
   Banknote,
   Barcode,
+  Bot,
   Bus,
   Calendar,
   CreditCard,
+  Gift,
+  MessageCircle,
   Package,
   Plane,
   RefreshCw,
@@ -62,7 +65,11 @@ const DashboardInicio = () => {
   const firstName = user.nome ? user.nome.split(' ')[0] : 'Cliente';
   const totalOpen = contracts.reduce((sum, contract) => sum + (contract.valorEmAberto || 0), 0);
   const overdueCount = contracts.filter((contract) => contract.status === 'em_atraso' || contract.status === 'suspenso').length;
+  const overdueContracts = contracts.filter((contract) => contract.status === 'em_atraso' || contract.status === 'suspenso');
+  const hasNoContracts = contracts.length === 0;
   const isDebtJourney = isOverdue() || isSuspended();
+  const isAcquisitionJourney = !isDebtJourney && hasNoContracts;
+  const isRelationshipJourney = !isDebtJourney && !hasNoContracts;
   const isProductJourney = !isDebtJourney;
 
   const statusInfo = isSuspended()
@@ -181,6 +188,39 @@ const DashboardInicio = () => {
     }
   ];
 
+  const acquisitionJourneyCards = [
+    {
+      title: 'Oferta do dia',
+      tag: 'Ativação',
+      description: 'Conheça produtos selecionados para começar sua relação com Casas Bahia Pay.',
+      result: 'Oferta comercial pronta para análise.',
+      icon: ShoppingBag,
+      path: '/dashboard/meus-produtos',
+      cta: 'Aproveitar oferta',
+      tone: 'border-red-200 bg-red-50 text-red-800'
+    },
+    {
+      title: 'Pré-aprovados',
+      tag: 'Elegibilidade',
+      description: 'Consulte se há cartão, carnê ou empréstimo disponível para seu CPF.',
+      result: 'Produtos elegíveis apresentados.',
+      icon: CreditCard,
+      path: '/dashboard/meus-produtos',
+      cta: 'Consultar agora',
+      tone: 'border-blue-200 bg-blue-50 text-blue-800'
+    },
+    {
+      title: 'Casas Bahia Pay',
+      tag: 'Conta digital',
+      description: 'Acesse Pix, conta digital e soluções financeiras do ecossistema Casas Bahia.',
+      result: 'Conta ou atendimento direcionado.',
+      icon: Banknote,
+      path: '/dashboard/casas-bahia-pay',
+      cta: 'Conhecer',
+      tone: 'border-green-200 bg-green-50 text-green-800'
+    }
+  ];
+
   const dailyOffers = [
     {
       title: 'iPhone 15',
@@ -212,7 +252,7 @@ const DashboardInicio = () => {
     { title: 'Bilhete Único', description: 'Coloque crédito no transporte.', icon: Bus }
   ];
 
-  const journeyCards = isDebtJourney ? debtJourneyCards : productJourneyCards;
+  const journeyCards = isDebtJourney ? debtJourneyCards : isAcquisitionJourney ? acquisitionJourneyCards : productJourneyCards;
 
   return (
     <>
@@ -227,12 +267,14 @@ const DashboardInicio = () => {
           <div>
             <p className="text-sm font-semibold text-[#E31C23]">Portal Financeiro Casas Bahia</p>
             <h1 className="mt-1 text-2xl md:text-3xl font-bold text-gray-950">
-              Olá, {firstName}. {isDebtJourney ? 'Vamos regularizar sua situação.' : 'Sua jornada está em dia.'}
+              Olá, {firstName}. {isDebtJourney ? 'Vamos regularizar sua situação.' : isAcquisitionJourney ? 'Temos ofertas selecionadas para você.' : 'Sua jornada está em dia.'}
             </h1>
             <p className="mt-2 max-w-2xl text-sm md:text-base text-gray-600">
               {isDebtJourney
                 ? 'Tudo aqui prioriza pagamento, simulação e renegociação para resolver a inadimplência.'
-                : 'Acompanhe contratos, produtos disponíveis, limites pré-aprovados e serviços úteis em um só lugar.'}
+                : isAcquisitionJourney
+                  ? 'Como você ainda não tem contrato ativo, a experiência funciona como vitrine de aquisição e elegibilidade.'
+                  : 'Acompanhe contratos, produtos disponíveis, limites pré-aprovados e serviços úteis em um só lugar.'}
             </p>
           </div>
           <div className={`inline-flex w-fit items-center gap-2 rounded-lg border px-3 py-2 text-sm font-bold ${statusInfo.className}`}>
@@ -260,11 +302,13 @@ const DashboardInicio = () => {
 
         <section>
           <div className="mb-4">
-            <h2 className="text-xl font-bold text-gray-950">{isDebtJourney ? 'Jornada de regularização' : 'Jornada em dia'}</h2>
+            <h2 className="text-xl font-bold text-gray-950">{isDebtJourney ? 'Jornada de regularização' : isAcquisitionJourney ? 'Jornada sem contrato ativo' : 'Jornada em dia'}</h2>
             <p className="text-sm text-gray-600">
               {isDebtJourney
                 ? 'Escolha entre pagar uma parcela, pesquisar condições ou fechar uma renegociação.'
-                : 'Escolha entre pagar uma parcela, adiantar pagamentos ou consultar produtos disponíveis.'}
+                : isAcquisitionJourney
+                  ? 'Escolha entre ofertas, pré-aprovados ou produtos disponíveis para começar.'
+                  : 'Escolha entre pagar uma parcela, adiantar pagamentos ou consultar produtos disponíveis.'}
             </p>
           </div>
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
@@ -328,6 +372,45 @@ const DashboardInicio = () => {
               </div>
             </div>
           </motion.section>
+        )}
+
+        {isDebtJourney && overdueContracts.length > 1 && (
+          <section className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
+            <div className="mb-4 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+              <div>
+                <h2 className="text-xl font-bold text-gray-950">Contratos em aberto priorizados</h2>
+                <p className="text-sm text-gray-600">Organizamos as melhores oportunidades para você comparar antes de fechar.</p>
+              </div>
+              <Button variant="outline" onClick={() => navigate('/dashboard/simular-acordo-lista')}>
+                Ver separadamente
+              </Button>
+            </div>
+            <div className="grid gap-3">
+              {overdueContracts.map((contract) => {
+                const priority = contract.status === 'suspenso' ? 'Alta prioridade' : 'Negociação disponível';
+                const estimatedDiscount = contract.valorEmAberto * (contract.status === 'suspenso' ? 0.9 : 0.82);
+                return (
+                  <div key={contract.id || contract.numero} className="rounded-lg border border-gray-100 bg-gray-50 p-4">
+                    <div className="grid gap-3 md:grid-cols-[1.2fr_1fr_1fr_auto] md:items-center">
+                      <div>
+                        <p className="text-xs font-bold uppercase text-gray-500">Contrato {contract.numero || contract.id}</p>
+                        <h3 className="font-bold text-gray-950">{contract.produto}</h3>
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-500">Valor original</p>
+                        <p className="font-bold text-gray-950">{formatCurrency(contract.valorEmAberto)}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-500">Economia estimada</p>
+                        <p className="font-bold text-green-700">{formatCurrency(estimatedDiscount)}</p>
+                      </div>
+                      <span className="rounded-full bg-red-100 px-3 py-1 text-xs font-bold text-red-700">{priority}</span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
         )}
 
         {isDebtJourney && (
@@ -433,6 +516,54 @@ const DashboardInicio = () => {
             </div>
           </section>
         )}
+
+        {isProductJourney && (
+          <section className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
+            <div className="mb-4 flex items-center gap-3">
+              <div className="rounded-lg bg-yellow-50 p-2">
+                <Gift className="h-5 w-5 text-yellow-700" />
+              </div>
+              <div>
+                <h2 className="text-xl font-bold text-gray-950">Benefícios e missões</h2>
+                <p className="text-sm text-gray-600">Evolua de Bronze para Prata e Ouro mantendo relacionamento ativo.</p>
+              </div>
+            </div>
+            <div className="grid gap-3 md:grid-cols-3">
+              {[
+                { level: 'Bronze', benefit: 'Ofertas básicas e conteúdos financeiros', mission: 'Atualize seu cadastro' },
+                { level: 'Prata', benefit: 'Cupons e ofertas personalizadas', mission: 'Consulte seus pré-aprovados' },
+                { level: 'Ouro', benefit: 'Cashback e prioridade em campanhas', mission: 'Use uma oferta do dia' }
+              ].map((item) => (
+                <div key={item.level} className="rounded-lg border border-gray-100 bg-gray-50 p-4">
+                  <p className="text-sm font-bold text-gray-950">Cliente {item.level}</p>
+                  <p className="mt-2 text-sm text-gray-600">{item.benefit}</p>
+                  <p className="mt-3 text-xs font-semibold text-[#E31C23]">Missão: {item.mission}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <section className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div>
+              <h2 className="text-xl font-bold text-gray-950">Precisa de ajuda?</h2>
+              <p className="mt-1 text-sm text-gray-600">
+                {isDebtJourney
+                  ? 'Atendimento direcionado para cobrança, segunda via e regularização.'
+                  : 'Atendimento direcionado para produtos, suporte e dúvidas sobre oportunidades.'}
+              </p>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Button variant="outline" onClick={() => navigate('/dashboard/ajuda')}>
+                <Bot className="mr-2 h-4 w-4" /> Chat com IA
+              </Button>
+              <Button onClick={() => navigate('/dashboard/ajuda')} className="bg-green-700 hover:bg-green-800">
+                <MessageCircle className="mr-2 h-4 w-4" /> WhatsApp
+              </Button>
+            </div>
+          </div>
+        </section>
       </div>
     </>
   );
