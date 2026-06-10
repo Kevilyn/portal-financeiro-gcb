@@ -18,25 +18,36 @@ import { useAuth } from '@/context/AuthContext';
 
 const DashboardLayout = () => {
   const location = useLocation();
-  const { user } = useAuth();
+  const { user, isOverdue, isSuspended } = useAuth();
   
   const isActive = (path) => {
     if (path === '/dashboard' && location.pathname !== '/dashboard') return false;
     return location.pathname.startsWith(path);
   };
 
-  const sidebarItems = [
-    { icon: Home, label: 'Início', path: '/dashboard' },
-    { icon: ShoppingBag, label: 'Meus Produtos', path: '/dashboard/produtos' },
+  const isDebtJourney = isOverdue() || isSuspended();
+
+  const debtSidebarItems = [
+    { icon: Home, label: 'In?cio', path: '/dashboard' },
     { icon: Receipt, label: 'Segunda Via', path: '/dashboard/segunda-via' },
-    { icon: Briefcase, label: 'Meus Acordos', path: '/dashboard/acordos' }, // Consolidated
     { icon: FileText, label: 'Simular Acordo', path: '/dashboard/simular-acordo-lista' },
     { icon: Briefcase, label: 'Renegociar', path: '/dashboard/renegociar' },
+    { icon: Briefcase, label: 'Meus Acordos', path: '/dashboard/acordos' },
+    { icon: CreditCard, label: 'Pagamentos', path: '/dashboard/pagamentos' },
+    { icon: HelpCircle, label: 'Ajuda', path: '/dashboard/ajuda' }
+  ];
+
+  const productSidebarItems = [
+    { icon: Home, label: 'In?cio', path: '/dashboard' },
+    { icon: ShoppingBag, label: 'Meus Produtos', path: '/dashboard/produtos' },
+    { icon: Receipt, label: 'Segunda Via', path: '/dashboard/segunda-via' },
     { icon: FastForward, label: 'Adiantamento', path: '/dashboard/adiantar-parcelas-lista' },
-    { icon: CreditCard, label: 'Pagamentos', path: '/dashboard/pagamentos' }, 
+    { icon: CreditCard, label: 'Pagamentos', path: '/dashboard/pagamentos' },
     { icon: FileText, label: 'Comprovantes', path: '/dashboard/comprovantes' },
     { icon: HelpCircle, label: 'Ajuda', path: '/dashboard/ajuda' }
   ];
+
+  const sidebarItems = isDebtJourney ? debtSidebarItems : productSidebarItems;
 
   return (
     <div className="min-h-screen bg-gray-50 pt-20 md:pt-24 relative">
