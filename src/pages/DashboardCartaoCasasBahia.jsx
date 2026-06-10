@@ -53,11 +53,11 @@ const DashboardCartaoCasasBahia = () => {
   return (
     <>
       <Helmet>
-        <title>Cartão BanQi Casas Bahia</title>
+        <title>Cartão Casas Bahia Pay</title>
       </Helmet>
 
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">Cartão BanQi Casas Bahia</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-6">Cartão Casas Bahia Pay</h1>
 
         <div className="flex gap-2 overflow-x-auto pb-4 mb-6 custom-scrollbar">
           {tabs.map((tab) => (

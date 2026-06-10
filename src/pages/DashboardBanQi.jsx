@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet';
 import { Wallet, CheckCircle, ArrowRight } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 
-const DashboardBanQi = () => {
+const DashboardCasasBahiaPayLegacy = () => {
   const [activeTab, setActiveTab] = useState('abrir');
 
   const tabs = [
@@ -16,11 +16,11 @@ const DashboardBanQi = () => {
   return (
     <>
       <Helmet>
-        <title>banQi - Portal Financeiro</title>
+        <title>Casas Bahia Pay - Portal Financeiro</title>
       </Helmet>
 
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">banQi</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-6">Casas Bahia Pay</h1>
 
         <div className="flex gap-2 mb-6">
           {tabs.map((tab) => (
@@ -48,13 +48,13 @@ const DashboardBanQi = () => {
               <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Wallet className="w-8 h-8 text-gray-400" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Você ainda não possui uma conta banQi ativa</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Você ainda não possui uma conta Casas Bahia Pay ativa</h3>
               <p className="text-gray-500 mb-6">Abra sua conta agora mesmo e aproveite benefícios exclusivos.</p>
               <Button 
                 onClick={() => setActiveTab('abrir')}
                 className="bg-[#FFD700] hover:bg-yellow-400 text-gray-900 font-bold"
               >
-                Quero minha conta banQi
+                Quero minha conta Casas Bahia Pay
               </Button>
             </div>
           )}
@@ -64,7 +64,7 @@ const DashboardBanQi = () => {
               <div className="relative z-10 max-w-2xl">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">Sua vida financeira completa em um só lugar</h2>
                 <p className="text-gray-900 font-medium text-lg mb-8">
-                  Abra sua conta digital banQi grátis e tenha acesso a Pix ilimitado, cartão sem anuidade e empréstimo pessoal na hora.
+                  Abra sua conta digital Casas Bahia Pay grátis e tenha acesso a Pix ilimitado, cartão sem anuidade e empréstimo pessoal na hora.
                 </p>
                 
                 <ul className="space-y-4 mb-8">
@@ -103,4 +103,4 @@ const DashboardBanQi = () => {
   );
 };
 
-export default DashboardBanQi;
+export default DashboardCasasBahiaPayLegacy;

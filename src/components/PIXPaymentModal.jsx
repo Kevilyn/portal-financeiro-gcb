@@ -7,7 +7,7 @@ import { useToast } from '@/components/ui/use-toast';
 const PIXPaymentModal = ({ isOpen, onClose, value, qrCodeValue }) => {
   const { toast } = useToast();
   // Mock PIX Copy Paste string if not provided
-  const pixKey = qrCodeValue || "00020126580014BR.GOV.BCB.PIX0136123e4567-e89b-12d3-a456-426614174000520400005303986540510.005802BR5913BanQi Pagamentos6008Sao Paulo62070503***6304E2CA";
+  const pixKey = qrCodeValue || "00020126580014BR.GOV.BCB.PIX0136123e4567-e89b-12d3-a456-426614174000520400005303986540510.005802BR5913Casas Bahia Pay Pagamentos6008Sao Paulo62070503***6304E2CA";
 
   const handleCopyPix = () => {
     navigator.clipboard.writeText(pixKey);

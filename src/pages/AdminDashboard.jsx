@@ -28,7 +28,7 @@ const AdminDashboard = () => {
 
   return (
     <>
-      <Helmet><title>Painel Administrativo - banQi</title></Helmet>
+      <Helmet><title>Painel Administrativo - Casas Bahia Pay</title></Helmet>
       
       <div className="max-w-7xl mx-auto space-y-8 pb-12">
         <div className="flex justify-between items-center">

@@ -252,7 +252,7 @@ const SignupPage = () => {
                    <Check className="w-10 h-10 text-green-600" />
                </div>
                <h2 className="text-2xl font-bold text-gray-900 mb-2">Conta Criada!</h2>
-               <p className="text-gray-600">Bem-vindo ao BanQi Casas Bahia. Redirecionando...</p>
+               <p className="text-gray-600">Bem-vindo ao Casas Bahia Pay. Redirecionando...</p>
            </motion.div>
         );
       default: return null;

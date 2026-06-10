@@ -20,7 +20,7 @@ import {
 const DashboardProdutosEducacional = () => {
   const products = [
     {
-      title: 'Carnê Digital banQi',
+      title: 'Carn? Digital',
       description: 'A evolução do carnê. Mais prático, seguro e na palma da sua mão.',
       icon: Package,
       color: 'text-blue-600',
@@ -42,15 +42,15 @@ const DashboardProdutosEducacional = () => {
       link: 'https://www.casasbahia.com.br/hotsite/cartao-casas-bahia.aspx?nid=202409'
     },
     {
-      title: 'Conta Digital banQi',
+      title: 'Conta Digital Casas Bahia Pay',
       description: 'Sua conta digital grátis, sem taxas e com rendimento.',
       icon: Wallet,
       color: 'text-yellow-600',
       bgColor: 'bg-yellow-100',
       borderColor: 'border-yellow-200',
       benefits: ['Rende 100% do CDI', 'Pix e transferências grátis', 'Cartão pré-pago grátis'],
-      info: 'A conta banQi é 100% digital e gratuita. Com ela você paga contas, faz recargas, compras e seu dinheiro rende mais que a poupança.',
-      link: 'https://www.banqi.com.br/'
+      info: 'A conta Casas Bahia Pay é 100% digital e gratuita. Com ela você paga contas, faz recargas, compras e seu dinheiro rende mais que a poupança.',
+      link: '/dashboard/casas-bahia-pay'
     }
   ];
 

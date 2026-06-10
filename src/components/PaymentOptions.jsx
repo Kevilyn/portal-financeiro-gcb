@@ -8,7 +8,7 @@ const PaymentOptions = ({ contract, installment, selectedPayment, onSelectPaymen
   const handleCopyPix = (e) => {
     e.stopPropagation();
     navigator.clipboard.writeText("00020126360014BR.GOV.BCB.PIX0114+551199999999520400005303986540510.005802BR5913Casas Bahia...");
-    toast({ title: "Código Pix copiado!", description: "Cole no app do seu banco ou BanQi para pagar." });
+    toast({ title: "Código Pix copiado!", description: "Cole no app do seu banco ou Casas Bahia Pay para pagar." });
   };
 
   const handleDownloadBoleto = (e) => {

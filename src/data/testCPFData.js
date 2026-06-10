@@ -9,9 +9,9 @@ export const TEST_CPF_DB = [
     financialProfile: { salary: 2800.00, creditLimit: 10000.00, score: 650 },
     contracts: [
       { id: 'CT-001', product: 'Carnê Digital', value: 10000.00, installments: 8, status: 'active', dueDateDay: 10 },
-      { id: 'CT-002', product: 'Cartão BanQi Casas Bahia', value: 3000.00, installments: 10, status: 'active', dueDateDay: 15 }
+      { id: 'CT-002', product: 'Cartão Casas Bahia Pay', value: 3000.00, installments: 10, status: 'active', dueDateDay: 15 }
     ],
-    banqi: { hasAccount: true, accountStatus: 'Ativo' },
+    casasBahiaPay: { hasAccount: true, accountStatus: 'Ativo' },
     preApprovedProducts: [{ productType: 'Empréstimo Pessoal', availableLimit: 5000 }],
     history: []
   },
@@ -26,7 +26,7 @@ export const TEST_CPF_DB = [
     contracts: [
       { id: 'CT-003', product: 'Carnê Digital (iPhone)', value: 15000.00, installments: 12, status: 'overdue', dueDateDay: 15 },
     ],
-    banqi: { hasAccount: false },
+    casasBahiaPay: { hasAccount: false },
     preApprovedProducts: [],
     history: []
   },
@@ -39,7 +39,7 @@ export const TEST_CPF_DB = [
     address: 'Av. dos Estados, 88',
     financialProfile: { salary: 4000.00, creditLimit: 8000.00, score: 700 },
     contracts: [],
-    banqi: { hasAccount: false },
+    casasBahiaPay: { hasAccount: false },
     preApprovedProducts: [
       { productType: 'Carnê Digital', availableLimit: 3000 },
       { productType: 'Cartão Casas Bahia', availableLimit: 1500 }
@@ -59,7 +59,7 @@ export const TEST_CPF_DB = [
       { id: 'CT-008', product: 'Cartão Casas Bahia', value: 10000.00, installments: 1, status: 'active', dueDateDay: 15 },
       { id: 'CT-009', product: 'Empréstimo', value: 5000.00, installments: 24, status: 'active', dueDateDay: 5 }
     ],
-    banqi: { hasAccount: true, accountStatus: 'Ativo' },
+    casasBahiaPay: { hasAccount: true, accountStatus: 'Ativo' },
     preApprovedProducts: [],
     history: []
   }
@@ -67,7 +67,7 @@ export const TEST_CPF_DB = [
 
 export const PRODUCTS_DB = [
   { id: 1, title: 'Carnê Digital', description: 'Gerencie seu carnê de forma simples e rápida' },
-  { id: 2, title: 'Cartão BanQi Casas Bahia', description: 'Crédito e benefícios exclusivos para você' },
+  { id: 2, title: 'Cartão Casas Bahia Pay', description: 'Crédito e benefícios exclusivos para você' },
   { id: 3, title: 'Empréstimo Pessoal', description: 'Dinheiro na mão com facilidade' },
-  { id: 4, title: 'BanQi Casas Bahia', description: 'Conta digital completa e gratuita' }
+  { id: 4, title: 'Casas Bahia Pay', description: 'Conta digital completa e gratuita' }
 ];

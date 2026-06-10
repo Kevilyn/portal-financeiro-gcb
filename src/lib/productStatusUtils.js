@@ -22,12 +22,12 @@ export const getProductStatus = (userOrCpf, productType) => {
 
   const typeMap = {
     'carne': ['carnê digital', 'carne digital', 'crediário'],
-    'cartao': ['cartão', 'cartao banqi', 'cartao casas bahia'],
+    'cartao': ['cartão', 'cartao casas bahia pay', 'cartao casas bahia'],
     'emprestimo': ['empréstimo', 'emprestimo', 'emprestimo pessoal'],
   };
 
-  if (productType === 'banqi') {
-    if (user.banqi?.hasAccount) {
+  if (productType === 'casas-bahia-pay') {
+    if (user.casasBahiaPay?.hasAccount) {
       return { status: 'Ativo', isVisible: true, color: 'green' };
     }
     return null; // Hide if account doesn't exist
@@ -64,7 +64,7 @@ export const getAllProductsWithStatus = (userOrCpf) => {
     { id: 'carne', name: 'Carnê Digital', path: '/dashboard/meus-produtos/carne-digital' },
     { id: 'cartao', name: 'Cartão Casas Bahia', path: '/dashboard/meus-produtos/cartao-casas-bahia' },
     { id: 'emprestimo', name: 'Empréstimo', path: '/dashboard/meus-produtos/emprestimo' },
-    { id: 'banqi', name: 'BanQi', path: '/dashboard/meus-produtos/banqi' }
+    { id: 'casas-bahia-pay', name: 'Casas Bahia Pay', path: '/dashboard/meus-produtos/casas-bahia-pay' }
   ];
 
   return products.map(p => {

@@ -9,15 +9,15 @@ const Breadcrumb = () => {
   const routeNameMap = {
     dashboard: 'Dashboard',
     produtos: 'Produtos',
-    'carne-digital': 'Carnê Digital banQi',
-    'cartao-casas-bahia': 'Cartão Casas Bahia',
-    'banqi': 'banQi',
+    'carne-digital': 'Carn? Digital',
+    'cartao-casas-bahia': 'Cart?o Casas Bahia Pay',
     perfil: 'Perfil',
     'simular-acordo': 'Simular Acordo',
     pagamentos: 'Pagamentos e Acordos',
     ajuda: 'Ajuda',
     'adiantar-parcelas': 'Adiantar Parcelas',
-    'meus-produtos': 'Meus Produtos'
+    'meus-produtos': 'Meus Produtos',
+    'casas-bahia-pay': 'Casas Bahia Pay'
   };
 
   return (

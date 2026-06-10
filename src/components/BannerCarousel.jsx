@@ -29,7 +29,7 @@ const BannerCarousel = () => {
     },
     {
       id: 4,
-      title: 'BanQi Casas Bahia',
+      title: 'Casas Bahia Pay',
       description: 'Conta digital completa e gratuita',
       bg: 'linear-gradient(135deg, #6c757d 0%, #95a5a6 100%)',
       image: 'https://images.unsplash.com/photo-1601597111158-2fceff292cdc'

@@ -12,7 +12,7 @@ const BoletoGenerator = ({ value, dueDate }) => {
     navigator.clipboard.writeText(barcode.replace(/\s/g, '').replace(/\./g, ''));
     toast({
       title: "Código de barras copiado!",
-      description: "Cole no seu aplicativo BanQi ou do seu banco para pagar.",
+      description: "Cole no seu aplicativo Casas Bahia Pay ou do seu banco para pagar.",
     });
   };
 

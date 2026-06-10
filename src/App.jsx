@@ -14,7 +14,6 @@ import SupportPage from '@/pages/SupportPage';
 import DashboardInicio from '@/pages/DashboardInicio';
 import DashboardPerfil from '@/pages/DashboardPerfil';
 import DashboardSimularAcordo from '@/pages/DashboardSimularAcordo';
-import SimularAcordo from '@/pages/SimularAcordo';
 import DashboardPagamentos from '@/pages/DashboardPagamentos';
 import DashboardAjuda from '@/pages/DashboardAjuda';
 import DashboardAdiantamento from '@/pages/DashboardAdiantamento';
@@ -74,13 +73,14 @@ function App() {
             <Route path="carne-digital" element={<DashboardCarneDigital />} />
             <Route path="cartao-casas-bahia" element={<DashboardCartaoCasasBahia />} />
             <Route path="casas-bahia" element={<DashboardCasasBahia />} />
+            <Route path="casas-bahia-pay" element={<DashboardCasasBahia />} />
             <Route path="emprestimo" element={<DashboardCasasBahia />} />
 
             {/* Alias Product Detail Routes (Task 4 specific structure) */}
             <Route path="meus-produtos/carne-digital" element={<DashboardCarneDigital />} />
             <Route path="meus-produtos/cartao-casas-bahia" element={<DashboardCartaoCasasBahia />} />
             <Route path="meus-produtos/emprestimo" element={<DashboardCasasBahia />} />
-            <Route path="meus-produtos/banqi" element={<DashboardCasasBahia />} />
+            <Route path="meus-produtos/casas-bahia-pay" element={<DashboardCasasBahia />} />
 
             {/* Agreements - Consolidated Route */}
             <Route path="acordos" element={<ConsolidatedAgreementsPage />} />
@@ -94,7 +94,6 @@ function App() {
             <Route path="adiantar-parcelas" element={<AdiantarParcelasPage />} />
             <Route path="simular-acordo" element={<SimularAcordoPage />} />
             <Route path="adiantamento" element={<DashboardAdiantamento />} /> 
-            <Route path="simular-acordo-legacy" element={<SimularAcordo />} /> 
             <Route path="simular-acordo/:contractId" element={<DashboardSimularAcordo />} />
 
             <Route path="pagamentos" element={<DashboardPagamentos />} />

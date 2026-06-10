@@ -7,7 +7,7 @@ const RecommendedProductsSection = () => {
   const solutions = [
     {
       icon: FileText,
-      title: 'Carnê Digital banQi',
+      title: 'Carn? Digital',
       description: 'Parcele suas compras com facilidade',
       bgColor: 'bg-[#0066CC]',
       textColor: 'text-white',
@@ -27,13 +27,13 @@ const RecommendedProductsSection = () => {
     },
     {
       icon: Wallet,
-      title: 'banQi',
+      title: 'Casas Bahia Pay',
       description: 'Conta digital completa e gratuita',
       bgColor: 'bg-[#FFD700]',
       textColor: 'text-gray-900',
       buttonVariant: 'default',
       buttonText: 'Abrir conta',
-      link: 'https://www.banqi.com.br/'
+      link: '/dashboard/casas-bahia-pay'
     },
     {
       icon: ShoppingBag,

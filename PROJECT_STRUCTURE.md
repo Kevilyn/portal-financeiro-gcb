@@ -1,7 +1,7 @@
-# Project Documentation: banQi & Casas Bahia Financial Portal
+# Project Documentation: Casas Bahia Pay Financial Portal
 
 ## 1. Project Overview
-This project is a comprehensive frontend financial management platform designed for Casas Bahia and banQi customers. It allows users to manage debts, simulate agreements, make advance payments, and view their financial products (Carnê Digital, Credit Cards, banQi Account).
+This project is a comprehensive frontend financial management platform designed for Casas Bahia and Casas Bahia Pay customers. It allows users to manage debts, simulate agreements, make advance payments, and view their financial products (Carnê Digital, Credit Cards, Casas Bahia Pay).
 
 - **Type**: Single Page Application (SPA)
 - **Tech Stack**: React 18, Vite, React Router v6, Tailwind CSS, Framer Motion
@@ -23,7 +23,7 @@ Requires authentication via `AuthContext`.
 - `/dashboard/meus-produtos`: Alternate Product View (Categorized)
 - `/dashboard/carne-digital`: Specific Carnê Digital Management
 - `/dashboard/cartao-casas-bahia`: Credit Card Management
-- `/dashboard/banqi`: BanQi Account Promotion/View
+- `/dashboard/casas-bahia-pay`: Casas Bahia Pay Account Promotion/View
 - `/dashboard/simular-acordo`: Agreement Simulation Landing
 - `/dashboard/simular-acordo/:contractId`: Specific Contract Negotiation
 - `/dashboard/pagamentos`: Payment History & Status
@@ -59,7 +59,7 @@ Requires admin privileges.
 | `DashboardAjuda.jsx` | FAQ and contact options. |
 | `DashboardCarneDigital.jsx` | Detailed view for Carnê Digital contracts. |
 | `DashboardCartaoCasasBahia.jsx` | Credit card dashboard showing limits, invoices, and status. |
-| `DashboardBanQi.jsx` | Information and call-to-action for the digital account. |
+| `DashboardCasas Bahia Pay.jsx` | Information and call-to-action for the digital account. |
 | `ReceiptsCenter.jsx` | Repository of generated receipts for payments and agreements. |
 | `DashboardConfirmacaoPagamento.jsx` | Success feedback page after a transaction. |
 | `AdminDashboard.jsx` | High-level metrics for administrators (Total users, debt volume). |

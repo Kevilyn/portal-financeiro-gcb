@@ -89,7 +89,7 @@ const DashboardProdutos = () => {
 
   return (
     <>
-      <Helmet><title>Meus Produtos - banQi Casas Bahia</title></Helmet>
+      <Helmet><title>Meus Produtos - Casas Bahia Pay</title></Helmet>
 
       <div className="max-w-6xl mx-auto pb-12 space-y-8">
         

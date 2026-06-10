@@ -42,9 +42,9 @@ const AIRecommendationCard = () => {
       default:
         return {
           title: 'Comece com o pé direito',
-          text: 'Abra sua conta digital banQi gratuita e ganhe cashback na primeira compra.',
-          action: 'Conhecer banQi',
-          path: '/dashboard/banqi',
+          text: 'Abra sua conta digital Casas Bahia Pay gratuita e ganhe cashback na primeira compra.',
+          action: 'Conhecer Casas Bahia Pay',
+          path: '/dashboard/casas-bahia-pay',
           gradient: 'from-blue-500 to-indigo-600',
           shadow: 'shadow-blue-200'
         };

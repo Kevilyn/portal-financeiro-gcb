@@ -24,7 +24,7 @@ const FAQSection = () => {
       answer: 'Sim! Você pode antecipar parcelas a qualquer momento e ainda ganhar descontos especiais na área de pagamentos do portal.'
     },
     {
-      question: 'Como criar uma conta no BanQi?',
+      question: 'Como criar uma conta no Casas Bahia Pay?',
       answer: 'A conta é totalmente digital e gratuita. Basta fazer o cadastro pelo app ou site, enviar seus documentos e pronto! Sua conta fica ativa em minutos.'
     },
     {

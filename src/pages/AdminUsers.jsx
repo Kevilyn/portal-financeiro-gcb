@@ -5,7 +5,7 @@ import UsersList from '@/components/UsersList';
 const AdminUsers = () => {
   return (
     <>
-      <Helmet><title>Gerenciar Usuários - Admin banQi</title></Helmet>
+      <Helmet><title>Gerenciar Usuários - Admin Casas Bahia Pay</title></Helmet>
       
       <div className="max-w-7xl mx-auto space-y-6 pb-12">
         <div>

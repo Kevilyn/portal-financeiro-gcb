@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet';
 import { Building2, CheckCircle, Wallet, ArrowRight } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 
-const DashboardBanQiCasasBahia = () => {
+const DashboardCasasBahiaPayCasasBahiaLegacy = () => {
   const [activeTab, setActiveTab] = useState('abrir');
 
   const tabs = [
@@ -16,11 +16,11 @@ const DashboardBanQiCasasBahia = () => {
   return (
     <>
       <Helmet>
-        <title>BanQi Casas Bahia - Portal Financeiro</title>
+        <title>Casas Bahia Pay - Portal Financeiro</title>
       </Helmet>
 
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">BanQi Casas Bahia</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-6">Casas Bahia Pay</h1>
 
         <div className="flex gap-2 mb-6">
           {tabs.map((tab) => (
@@ -64,7 +64,7 @@ const DashboardBanQiCasasBahia = () => {
               <div className="relative z-10 max-w-2xl">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">Sua vida financeira completa em um só lugar</h2>
                 <p className="text-purple-100 text-lg mb-8">
-                  Abra sua conta digital BanQi Casas Bahia grátis e tenha acesso a Pix ilimitado, cartão sem anuidade e empréstimo pessoal na hora.
+                  Abra sua conta digital Casas Bahia Pay grátis e tenha acesso a Pix ilimitado, cartão sem anuidade e empréstimo pessoal na hora.
                 </p>
                 
                 <ul className="space-y-4 mb-8">
@@ -103,4 +103,4 @@ const DashboardBanQiCasasBahia = () => {
   );
 };
 
-export default DashboardBanQiCasasBahia;
+export default DashboardCasasBahiaPayCasasBahiaLegacy;

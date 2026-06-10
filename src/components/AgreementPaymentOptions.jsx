@@ -24,9 +24,9 @@ const AgreementPaymentOptions = ({ selectedMethod, onSelect, value, dueDate }) =
       activeColor: 'border-orange-600 bg-orange-100 ring-1 ring-orange-600'
     },
     {
-      id: 'banqi',
-      title: 'Saldo BanQi',
-      description: 'Pague direto com seu saldo da conta BanQi.',
+      id: 'casas-bahia-pay',
+      title: 'Saldo Casas Bahia Pay',
+      description: 'Pague direto com seu saldo da conta Casas Bahia Pay.',
       icon: <Wallet className="w-6 h-6 text-pink-600" />,
       color: 'border-pink-200 bg-pink-50 hover:bg-pink-100',
       activeColor: 'border-pink-600 bg-pink-100 ring-1 ring-pink-600'
