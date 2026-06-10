@@ -71,7 +71,7 @@ const hydrateUser = (simpleUser) => {
     let installmentStatus = 'pendente';
     
     // Map status from contract object if available, else fallback to user status
-    if (c.status === 'active') installmentStatus = 'pendente';
+    if (c.status === 'active') installmentStatus = simpleUser.status === 'Em dia' ? 'misto' : 'pendente';
     if (simpleUser.status === 'Em dia' && !c.status) installmentStatus = 'misto'; // Some paid
     
     // Custom logic for specific CPFs/Products:
@@ -247,6 +247,9 @@ export const AuthProvider = ({ children }) => {
     const finalUser = {
       ...scenarioData,
       ...userDataInput, 
+      nome: userDataInput.nome || userDataInput.name || scenarioData.nome,
+      telefone: userDataInput.telefone || userDataInput.phone || scenarioData.telefone,
+      endereco: userDataInput.endereco || userDataInput.street || scenarioData.endereco,
       notifications: scenarioData.notifications || generateMockNotifications(),
       activities: activities,
       notificationsSettings: { whatsapp: true, push: true, email: false },

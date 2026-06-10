@@ -36,7 +36,9 @@ const getOpenInstallments = (contracts = []) =>
   );
 
 const getBestAgreementOffer = (contracts = []) => {
-  const candidates = contracts.filter((contract) => contract.valorEmAberto > 0);
+  const candidates = contracts.filter((contract) =>
+    contract.valorEmAberto > 0 && (contract.status === 'em_atraso' || contract.status === 'suspenso')
+  );
   if (!candidates.length) return null;
 
   const scored = candidates.map((contract) => {
@@ -97,9 +99,9 @@ const DashboardInicio = () => {
       bg: 'bg-blue-50'
     },
     {
-      label: 'Saldo em aberto',
-      value: formatCurrency(totalOpen),
-      helper: overdueCount ? `${overdueCount} contrato(s) em atraso` : 'Sem atraso identificado',
+      label: isDebtJourney ? 'Dívida em atraso' : hasNoContracts ? 'Produtos ativos' : 'Saldo de contratos',
+      value: hasNoContracts ? '0' : formatCurrency(totalOpen),
+      helper: isDebtJourney ? `${overdueCount} contrato(s) em atraso` : hasNoContracts ? 'Nenhum contrato ativo' : 'Saldo em dia, sem inadimplência',
       icon: WalletCards,
       color: 'text-slate-700',
       bg: 'bg-slate-50'

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, ArrowRight, Check, ShieldCheck, User, Calendar, MapPin, Mail, Phone, Lock } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
@@ -8,16 +8,19 @@ import { toast } from '@/components/ui/use-toast';
 import ContactValidationModal from '@/components/ContactValidationModal';
 import PasswordInput from '@/components/PasswordInput';
 import PasswordStrengthIndicator from '@/components/PasswordStrengthIndicator';
+import { formatCPF } from '@/lib/cpfUtils';
 
 const SignupPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { login } = useAuth();
   const [step, setStep] = useState(1);
   const [showValidation, setShowValidation] = useState(false);
+  const initialCpf = formatCPF(location.state?.cpf || location.state?.customerData?.cpf || '');
   
   const [formData, setFormData] = useState({
     name: '',
-    cpf: '',
+    cpf: initialCpf,
     birthDate: '',
     gender: '',
     cep: '',
@@ -39,7 +42,7 @@ const SignupPage = () => {
     const { name, value, type, checked } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: name === 'cpf' ? formatCPF(value) : type === 'checkbox' ? checked : value
     }));
     
     // Clear errors when typing
