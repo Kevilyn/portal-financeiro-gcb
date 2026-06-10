@@ -159,6 +159,8 @@ const hydrateUser = (simpleUser) => {
     valorTotal: contratos.reduce((acc, c) => acc + c.valorEmAberto, 0),
     proximoVencimento: contratos[0]?.proximoVencimento || null,
     financialProfile: simpleUser.financialProfile || { salary: 0, creditLimit: 0, score: 0 },
+    casasBahiaPay: simpleUser.casasBahiaPay || { hasAccount: false },
+    preApprovedProducts: simpleUser.preApprovedProducts || [],
     agreements: [], // General agreements
     agreementHistory: [], // Product specific agreements
     notifications: generateMockNotifications(),
@@ -194,6 +196,9 @@ export const AuthProvider = ({ children }) => {
     detalhes: { contratos: [] },
     valorTotal: 0,
     proximoVencimento: null,
+    financialProfile: { salary: 0, creditLimit: 0, score: 420 },
+    casasBahiaPay: { hasAccount: false },
+    preApprovedProducts: [],
     createdAt: new Date().toISOString(),
     lastLogin: null,
     agreements: [],
@@ -276,7 +281,7 @@ export const AuthProvider = ({ children }) => {
     
     // Select default contract for flows
     if (finalUser.contratos && finalUser.contratos.length > 0) {
-      const overdue = finalUser.contratos.find(c => c.status === 'em_atraso' || c.status === 'suspended');
+      const overdue = finalUser.contratos.find(c => c.status === 'em_atraso' || c.status === 'suspenso');
       selectContract(overdue || finalUser.contratos[0]);
     }
   };
@@ -312,6 +317,9 @@ export const AuthProvider = ({ children }) => {
       produtos: [],
       valorTotal: 0,
       proximoVencimento: null,
+      financialProfile: { salary: 0, creditLimit: 0, score: 420 },
+      casasBahiaPay: { hasAccount: false },
+      preApprovedProducts: [],
       createdAt: new Date().toISOString(),
       lastLogin: new Date().toISOString(),
       notificationsSettings: { whatsapp: true, push: true, email: true },

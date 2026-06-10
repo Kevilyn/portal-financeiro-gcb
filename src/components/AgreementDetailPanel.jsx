@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Button } from '@/components/ui/button';
@@ -12,8 +12,6 @@ import AgreementInstallmentsList from './AgreementInstallmentsList';
 import AgreementPaymentHistory from './AgreementPaymentHistory';
 
 const AgreementDetailPanel = ({ agreement, onBack }) => {
-  const [activeTab, setActiveTab] = useState("info");
-
   if (!agreement) return (
     <div className="h-full flex flex-col items-center justify-center text-center p-8 text-gray-400">
        <FileText className="w-16 h-16 mb-4 opacity-20" />
@@ -28,7 +26,7 @@ const AgreementDetailPanel = ({ agreement, onBack }) => {
       numero: i + 1,
       valor: agreement.value / (agreement.installments || 1),
       dataVencimento: new Date(new Date(agreement.createdAt || Date.now()).setMonth(new Date().getMonth() + i)).toISOString(),
-      status: i === 0 && agreement.status === 'paid' ? 'paga' : 'pendente'
+      status: agreement.status === 'paid' ? 'paga' : agreement.status === 'overdue' && i === 0 ? 'vencida' : 'pendente'
   }));
 
   // Mock history
@@ -38,6 +36,13 @@ const AgreementDetailPanel = ({ agreement, onBack }) => {
       method: 'PIX',
       description: 'Pagamento Total'
   }] : [];
+
+  const statusConfig = {
+    paid: { label: 'Pago', className: 'bg-green-100 text-green-700' },
+    overdue: { label: 'Vencido', className: 'bg-red-100 text-red-700' },
+    pending: { label: 'Pendente', className: 'bg-amber-100 text-amber-700' },
+    active: { label: 'Ativo', className: 'bg-blue-100 text-blue-700' }
+  }[agreement.status] || { label: 'Ativo', className: 'bg-blue-100 text-blue-700' };
 
   return (
     <div className="h-full flex flex-col bg-white md:rounded-l-none md:rounded-r-xl overflow-hidden">
@@ -54,8 +59,8 @@ const AgreementDetailPanel = ({ agreement, onBack }) => {
                <h2 className="text-2xl font-bold text-gray-900">Acordo #{agreement.id}</h2>
                <p className="text-sm text-gray-500">Criado em {new Date(agreement.createdAt || Date.now()).toLocaleDateString('pt-BR')}</p>
             </div>
-            <Badge className={agreement.status === 'paid' ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'}>
-               {agreement.status === 'paid' ? 'Pago' : 'Ativo'}
+            <Badge className={statusConfig.className}>
+               {statusConfig.label}
             </Badge>
          </div>
       </div>
@@ -74,7 +79,7 @@ const AgreementDetailPanel = ({ agreement, onBack }) => {
                </div>
             </div>
 
-            <Tabs defaultValue="info" className="w-full" onValueChange={setActiveTab}>
+            <Tabs defaultValue="info" className="w-full">
                <TabsList className="w-full grid grid-cols-3 mb-4">
                   <TabsTrigger value="info">Informações</TabsTrigger>
                   <TabsTrigger value="parcelas">Parcelas</TabsTrigger>
@@ -140,12 +145,25 @@ const AgreementDetailPanel = ({ agreement, onBack }) => {
 
       {/* Footer Actions */}
       <div className="p-4 border-t border-gray-100 bg-gray-50/50 grid grid-cols-2 gap-3">
-         <Button variant="outline" className="w-full border-gray-300">
-            <RefreshCcw className="w-4 h-4 mr-2" /> Renegociar
-         </Button>
-         <Button className="w-full bg-[#E31C23] hover:bg-[#c41a1f] text-white">
-            <CreditCard className="w-4 h-4 mr-2" /> Pagar Agora
-         </Button>
+         {agreement.status === 'paid' ? (
+            <>
+               <Button variant="outline" className="w-full border-gray-300">
+                  <Download className="w-4 h-4 mr-2" /> Termo
+               </Button>
+               <Button className="w-full bg-green-700 hover:bg-green-800 text-white">
+                  <FileText className="w-4 h-4 mr-2" /> Comprovante
+               </Button>
+            </>
+         ) : (
+            <>
+               <Button variant="outline" className="w-full border-gray-300">
+                  <RefreshCcw className="w-4 h-4 mr-2" /> Ajustar acordo
+               </Button>
+               <Button className="w-full bg-[#E31C23] hover:bg-[#c41a1f] text-white">
+                  <CreditCard className="w-4 h-4 mr-2" /> {agreement.status === 'overdue' ? 'Regularizar' : 'Pagar agora'}
+               </Button>
+            </>
+         )}
       </div>
     </div>
   );

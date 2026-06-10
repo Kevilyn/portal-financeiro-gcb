@@ -11,7 +11,6 @@ import {
   Bus,
   Calendar,
   CreditCard,
-  Gift,
   MessageCircle,
   Package,
   Plane,
@@ -26,6 +25,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/context/AuthContext';
 import CreditoPreAprovadoSection from '@/components/CreditoPreAprovadoSection';
+import ProfileScoreMissions from '@/components/ProfileScoreMissions';
 import { formatCurrency } from '@/lib/currencyUtils';
 
 const getOpenInstallments = (contracts = []) =>
@@ -302,6 +302,8 @@ const DashboardInicio = () => {
           ))}
         </section>
 
+        <ProfileScoreMissions user={user} />
+
         <section>
           <div className="mb-4">
             <h2 className="text-xl font-bold text-gray-950">{isDebtJourney ? 'Jornada de regularização' : isAcquisitionJourney ? 'Jornada sem contrato ativo' : 'Jornada em dia'}</h2>
@@ -515,33 +517,6 @@ const DashboardInicio = () => {
               <Button onClick={() => navigate('/dashboard/casas-bahia-pay')} variant="outline" className="mt-5 w-full">
                 Conhecer Casas Bahia Pay
               </Button>
-            </div>
-          </section>
-        )}
-
-        {isProductJourney && (
-          <section className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
-            <div className="mb-4 flex items-center gap-3">
-              <div className="rounded-lg bg-yellow-50 p-2">
-                <Gift className="h-5 w-5 text-yellow-700" />
-              </div>
-              <div>
-                <h2 className="text-xl font-bold text-gray-950">Benefícios e missões</h2>
-                <p className="text-sm text-gray-600">Evolua de Bronze para Prata e Ouro mantendo relacionamento ativo.</p>
-              </div>
-            </div>
-            <div className="grid gap-3 md:grid-cols-3">
-              {[
-                { level: 'Bronze', benefit: 'Ofertas básicas e conteúdos financeiros', mission: 'Atualize seu cadastro' },
-                { level: 'Prata', benefit: 'Cupons e ofertas personalizadas', mission: 'Consulte seus pré-aprovados' },
-                { level: 'Ouro', benefit: 'Cashback e prioridade em campanhas', mission: 'Use uma oferta do dia' }
-              ].map((item) => (
-                <div key={item.level} className="rounded-lg border border-gray-100 bg-gray-50 p-4">
-                  <p className="text-sm font-bold text-gray-950">Cliente {item.level}</p>
-                  <p className="mt-2 text-sm text-gray-600">{item.benefit}</p>
-                  <p className="mt-3 text-xs font-semibold text-[#E31C23]">Missão: {item.mission}</p>
-                </div>
-              ))}
             </div>
           </section>
         )}
