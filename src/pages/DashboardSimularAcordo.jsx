@@ -5,7 +5,7 @@ import { useAuth } from '@/context/AuthContext';
 import { Helmet } from 'react-helmet';
 import { ChevronLeft, ArrowRight, Settings2, Sparkles } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import useContractData from '@/hooks/useContractData';
 
 // Components
@@ -25,6 +25,8 @@ import FacaSuaPropostaButton from '@/components/FacaSuaPropostaButton';
 const DashboardSimularAcordo = () => {
   const { isNewUser, createAgreement, recordAgreement } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const isRenegotiation = location.pathname.includes('/renegociar');
   const { contractId } = useParams();
   
   // Use custom hook to get contract data
@@ -164,12 +166,12 @@ const DashboardSimularAcordo = () => {
 
   return (
     <>
-      <Helmet><title>Simular Acordo - Portal Financeiro</title></Helmet>
+      <Helmet><title>{isRenegotiation ? 'Renegociar' : 'Simular Acordo'} - Portal Financeiro</title></Helmet>
 
       <div className="max-w-6xl mx-auto pb-16 px-4">
         {/* Navigation Breadcrumb */}
-        <Button variant="ghost" onClick={() => navigate('/dashboard/simular-acordo-lista')} className="mb-4 pl-0 text-gray-500 hover:text-blue-600 transition-colors">
-           <ChevronLeft className="w-4 h-4 mr-1" /> Voltar à Seleção
+        <Button variant="ghost" onClick={() => navigate(isRenegotiation ? '/dashboard/renegociar' : '/dashboard/simular-acordo-lista')} className="mb-4 pl-0 text-gray-500 hover:text-blue-600 transition-colors">
+           <ChevronLeft className="w-4 h-4 mr-1" /> Voltar à seleção
         </Button>
 
         {isSuccess ? (
@@ -233,7 +235,7 @@ const DashboardSimularAcordo = () => {
                                         <>
                                             <div className="flex items-center gap-2 mb-6">
                                                 <Sparkles className="w-5 h-5 text-blue-600" />
-                                                <h3 className="text-xl font-bold text-gray-900">Escolha seu Plano Ideal</h3>
+                                                <h3 className="text-xl font-bold text-gray-900">{isRenegotiation ? 'Escolha a condição para formalizar' : 'Escolha uma condição para simular'}</h3>
                                             </div>
 
                                             <OpportunitiesSection 

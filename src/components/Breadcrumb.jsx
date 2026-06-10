@@ -15,6 +15,8 @@ const Breadcrumb = () => {
     'simular-acordo': 'Simular Acordo',
     pagamentos: 'Pagamentos e Acordos',
     ajuda: 'Ajuda',
+    'segunda-via': 'Segunda Via',
+    renegociar: 'Renegociar',
     'adiantar-parcelas': 'Adiantar Parcelas',
     'meus-produtos': 'Meus Produtos',
     'casas-bahia-pay': 'Casas Bahia Pay'

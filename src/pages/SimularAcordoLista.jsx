@@ -84,17 +84,19 @@ const SimularAcordoLista = () => {
                             </div>
                         </div>
 
-                        <Button 
-                            onClick={() => handleSelect(contract)}
-                            className={cn(
-                                "shadow-md min-w-[140px]",
-                                (contract.status === 'em_atraso' || contract.status === 'suspenso') 
-                                    ? "bg-red-600 hover:bg-red-700 text-white" 
-                                    : "bg-blue-600 hover:bg-blue-700 text-white"
+                        <div className="flex flex-col gap-2 sm:flex-row">
+                            <Button variant="outline" onClick={() => handleSelect(contract)} className="min-w-[150px]">
+                                Simular condições
+                            </Button>
+                            {(contract.status === 'em_atraso' || contract.status === 'suspenso') && (
+                                <Button
+                                    onClick={() => navigate(`/dashboard/renegociar/${contract.id || contract.numero}`)}
+                                    className="min-w-[150px] bg-red-600 text-white shadow-md hover:bg-red-700"
+                                >
+                                    Renegociar agora
+                                </Button>
                             )}
-                        >
-                            {(contract.status === 'em_atraso' || contract.status === 'suspenso') ? "Negociar" : "Simular"}
-                        </Button>
+                        </div>
                     </motion.div>
                 ))}
             </div>

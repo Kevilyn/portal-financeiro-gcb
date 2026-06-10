@@ -6,6 +6,7 @@ import {
   ArrowRight,
   BadgePercent,
   Banknote,
+  Barcode,
   Bus,
   Calendar,
   CreditCard,
@@ -143,6 +144,39 @@ const DashboardInicio = () => {
     { title: 'Bilhete Único', description: 'Coloque crédito no transporte.', icon: Bus }
   ];
 
+  const journeyCards = [
+    {
+      title: 'Segunda Via',
+      tag: 'Intenção de pagamento',
+      description: 'Emitir um boleto ou fatura já existente para pagar sem mudar o contrato.',
+      result: 'Boleto atualizado para pagamento.',
+      icon: Barcode,
+      path: '/dashboard/segunda-via',
+      cta: 'Emitir boleto',
+      tone: 'border-blue-200 bg-blue-50 text-blue-800'
+    },
+    {
+      title: 'Simular Acordo',
+      tag: 'Intenção de negociação',
+      description: 'Consultar descontos, entrada, parcelas e datas antes de decidir.',
+      result: 'Opções visíveis, sem compromisso.',
+      icon: Banknote,
+      path: '/dashboard/simular-acordo-lista',
+      cta: 'Ver condições',
+      tone: 'border-amber-200 bg-amber-50 text-amber-800'
+    },
+    {
+      title: 'Renegociar',
+      tag: 'Conversão de negociação',
+      description: 'Formalizar uma nova condição para regularizar a dívida.',
+      result: 'Acordo gerado e entrada pronta para pagamento.',
+      icon: BadgePercent,
+      path: '/dashboard/renegociar',
+      cta: 'Renegociar agora',
+      tone: 'border-red-200 bg-red-50 text-red-800'
+    }
+  ];
+
   return (
     <>
       <Helmet><title>Início - Portal Financeiro Casas Bahia</title></Helmet>
@@ -181,6 +215,34 @@ const DashboardInicio = () => {
               <p className="mt-3 text-xs text-gray-500">{card.helper}</p>
             </div>
           ))}
+        </section>
+
+        <section>
+          <div className="mb-4">
+            <h2 className="text-xl font-bold text-gray-950">O que você quer fazer agora?</h2>
+            <p className="text-sm text-gray-600">Escolha o caminho pela intenção: pagar, pesquisar condições ou fechar uma renegociação.</p>
+          </div>
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+            {journeyCards.map((journey) => (
+              <button
+                key={journey.title}
+                type="button"
+                onClick={() => navigate(journey.path)}
+                className="rounded-lg border border-gray-200 bg-white p-5 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-[#E31C23] hover:shadow-md"
+              >
+                <div className={`mb-4 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-bold ${journey.tone}`}>
+                  <journey.icon className="h-4 w-4" />
+                  {journey.tag}
+                </div>
+                <h3 className="text-lg font-bold text-gray-950">{journey.title}</h3>
+                <p className="mt-2 min-h-[48px] text-sm text-gray-600">{journey.description}</p>
+                <p className="mt-3 text-xs font-semibold text-gray-500">Resultado: {journey.result}</p>
+                <span className="mt-5 inline-flex items-center text-sm font-bold text-[#E31C23]">
+                  {journey.cta} <ArrowRight className="ml-1 h-4 w-4" />
+                </span>
+              </button>
+            ))}
+          </div>
         </section>
 
         {bestOffer && (

@@ -17,6 +17,7 @@ import DashboardSimularAcordo from '@/pages/DashboardSimularAcordo';
 import DashboardPagamentos from '@/pages/DashboardPagamentos';
 import DashboardAjuda from '@/pages/DashboardAjuda';
 import DashboardAdiantamento from '@/pages/DashboardAdiantamento';
+import SegundaViaPage from '@/pages/SegundaViaPage';
 import ReceiptsCenter from '@/pages/ReceiptsCenter';
 import ProcessarAdiantamento from '@/pages/ProcessarAdiantamento';
 import DashboardConfirmacaoPagamento from '@/pages/DashboardConfirmacaoPagamento';
@@ -93,6 +94,9 @@ function App() {
             {/* Flow Pages */}
             <Route path="adiantar-parcelas" element={<AdiantarParcelasPage />} />
             <Route path="simular-acordo" element={<SimularAcordoPage />} />
+            <Route path="segunda-via" element={<SegundaViaPage />} />
+            <Route path="renegociar" element={<SimularAcordoPage />} />
+            <Route path="renegociar/:contractId" element={<DashboardSimularAcordo />} />
             <Route path="adiantamento" element={<DashboardAdiantamento />} /> 
             <Route path="simular-acordo/:contractId" element={<DashboardSimularAcordo />} />
 

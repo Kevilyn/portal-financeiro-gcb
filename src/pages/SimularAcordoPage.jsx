@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { useAuth } from '@/context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { 
     ChevronLeft, 
@@ -18,6 +18,8 @@ import { formatCurrency } from '@/lib/currencyUtils';
 const SimularAcordoPage = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const isRenegotiation = location.pathname.includes('/renegociar');
 
   const allContracts = user?.contratos || [];
   
@@ -28,7 +30,7 @@ const SimularAcordoPage = () => {
 
   return (
     <div className="max-w-4xl mx-auto pb-12 px-4">
-        <Helmet><title>Simular Acordo - Portal Financeiro</title></Helmet>
+        <Helmet><title>{isRenegotiation ? 'Renegociar' : 'Simular Acordo'} - Portal Financeiro</title></Helmet>
 
         <Button variant="ghost" onClick={() => navigate('/dashboard')} className="mb-6 pl-0 hover:bg-transparent text-gray-500 hover:text-gray-900">
             <ChevronLeft className="w-4 h-4 mr-1" /> Voltar ao Dashboard
@@ -36,7 +38,7 @@ const SimularAcordoPage = () => {
 
         <div className="mb-6">
             <h1 className="text-3xl font-bold text-gray-900 mb-2 flex items-center gap-2">
-                <Handshake className="w-8 h-8 text-blue-600" /> Simular Acordo
+                <Handshake className="w-8 h-8 text-blue-600" /> {isRenegotiation ? 'Renegociar' : 'Simular Acordo'}
             </h1>
             <p className="text-gray-600">
                 Escolha um contrato em atraso para ver as opções de negociação e pagamento disponíveis.
@@ -99,10 +101,10 @@ const SimularAcordoPage = () => {
 
                         {/* TASK 4: Navigation logic */}
                         <Button 
-                            onClick={() => navigate(`/dashboard/simular-acordo/${contract.id || contract.numero}`)}
+                            onClick={() => navigate(`/dashboard/${isRenegotiation ? 'renegociar' : 'simular-acordo'}/${contract.id || contract.numero}`)}
                             className="bg-red-600 hover:bg-red-700 text-white shadow-lg min-w-[160px] h-12 rounded-xl text-md font-bold transition-transform hover:-translate-y-0.5"
                         >
-                            Simular Acordo <ArrowRight className="w-4 h-4 ml-2" />
+                            {isRenegotiation ? 'Renegociar agora' : 'Simular condições'} <ArrowRight className="w-4 h-4 ml-2" />
                         </Button>
                     </motion.div>
                 ))}

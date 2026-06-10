@@ -10,7 +10,8 @@ import {
   HelpCircle, 
   FastForward, 
   Home,
-  Briefcase
+  Briefcase,
+  Receipt
 } from 'lucide-react';
 import Logo from '@/components/Logo';
 import { useAuth } from '@/context/AuthContext';
@@ -27,8 +28,10 @@ const DashboardLayout = () => {
   const sidebarItems = [
     { icon: Home, label: 'Início', path: '/dashboard' },
     { icon: ShoppingBag, label: 'Meus Produtos', path: '/dashboard/produtos' },
+    { icon: Receipt, label: 'Segunda Via', path: '/dashboard/segunda-via' },
     { icon: Briefcase, label: 'Meus Acordos', path: '/dashboard/acordos' }, // Consolidated
     { icon: FileText, label: 'Simular Acordo', path: '/dashboard/simular-acordo-lista' },
+    { icon: Briefcase, label: 'Renegociar', path: '/dashboard/renegociar' },
     { icon: FastForward, label: 'Adiantamento', path: '/dashboard/adiantar-parcelas-lista' },
     { icon: CreditCard, label: 'Pagamentos', path: '/dashboard/pagamentos' }, 
     { icon: FileText, label: 'Comprovantes', path: '/dashboard/comprovantes' },
